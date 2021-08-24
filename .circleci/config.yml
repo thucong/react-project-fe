@@ -2,10 +2,15 @@ version: 2.1
 
 workflows:
   version: 2
-  build:
+  build_deploy:
     jobs:
       - build
-
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 jobs:
   build:
     working_directory: ~/mern-starter
@@ -31,3 +36,5 @@ jobs:
           command: npm test
       - store_test_results:
           path: test-results.xml
+  
+  
