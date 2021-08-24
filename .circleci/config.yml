@@ -42,6 +42,6 @@ jobs:
       - run:
           name: Deploy Master to Heroku
           command: |
-            git push https://heroku:<a href="/cdn-cgi/l/email-protection" class="__cf_email__">[email protected]</a>/$HEROKU_APP_NAME.git master
+            git push https://heroku:[email protected]/$HEROKU_APP_NAME.git master
   
   
