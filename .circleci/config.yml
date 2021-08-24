@@ -1,5 +1,4 @@
 
-
 workflows:
   version: 2
   build_deploy:
@@ -15,8 +14,8 @@ jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: circleci/node:10.16.3
-      - image: mongo:4.2.0
+      - image: circleci/node:10-browsers
+      - image: trufflesuite/ganache-cli
     steps:
       - checkout
       - run:
@@ -27,15 +26,19 @@ jobs:
       - run:
           name: install-npm-wee
           command: npm install
+      - run:
+          name: Migrate Contracts
+          command: ./node_modules/truffle/build/cli.bundled.js migrate --network development
+      - run:
+          name: Test Contracts
+          command: ./node_modules/truffle/build/cli.bundled.js test --network development
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: test
-          command: npm test
       - store_test_results:
           path: test-results.xml
+     
   deploy:
     docker:
       - image: buildpack-deps:trusty
