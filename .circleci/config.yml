@@ -37,5 +37,13 @@ jobs:
       - store_test_results:
           path: test-results.xml
   deploy:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:<a href="/cdn-cgi/l/email-protection" class="__cf_email__">[email protected]</a>/$HEROKU_APP_NAME.git master
   
   
