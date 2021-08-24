@@ -1,4 +1,4 @@
-version: 2.1
+
 
 workflows:
   version: 2
@@ -36,5 +36,6 @@ jobs:
           command: npm test
       - store_test_results:
           path: test-results.xml
+  deploy:
   
   
