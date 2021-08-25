@@ -19,6 +19,9 @@ jobs:
       - run:
           name: install-npm-wee
           command: npm install
+      - run:
+          name: run-npm
+          command: npm run dev
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
