@@ -34,9 +34,7 @@ jobs:
             - ./node_modules
       - run:
           name: test
-          command: npm test
-      - store_test_results:
-          path: test-results.xml
+          command: npm run test
   deploy:
     docker:
       - image: buildpack-deps:trusty
