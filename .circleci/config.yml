@@ -1,9 +1,15 @@
 
 workflows:
   version: 2
-  build:
+  build_deploy:
     jobs:
       - build  
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 jobs:
   build:
     working_directory: ~/repo
@@ -31,5 +37,13 @@ jobs:
           command: npm test
       - store_test_results:
           path: test-results.xml
-  
+  deploy:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://test-demo-react.herokuapp.com/
   
