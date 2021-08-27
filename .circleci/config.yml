@@ -8,6 +8,9 @@ workflows:
       - deploy:
           requires:
             - build
+          filters:
+            branches:
+              only: dev
 jobs:
   build:
     working_directory: ~/repo
